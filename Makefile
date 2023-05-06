@@ -83,6 +83,7 @@ CC = $(PREFIX)gcc
 AS = $(PREFIX)gcc -x assembler-with-cpp
 CP = $(PREFIX)objcopy
 SZ = $(PREFIX)size
+GDB = $(PREFIX)gdb
 endif
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
@@ -193,7 +194,11 @@ flash:
 
 unlock:
 	openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c init -c "reset halt" -c "stm32f1x unlock 0"
-  
+
+gdb:    $(BUILD_DIR)/$(TARGET).elf
+#	st-util -p 4242 &	// you can maually type this once
+	$(GDB) --eval-command="target extended-remote :4242" $(BUILD_DIR)/$(TARGET).elf
+
 #######################################
 # dependencies
 #######################################

@@ -112,6 +112,7 @@ int main(void)
   {
 
     HAL_Delay(DELAY_IN_MAIN_LOOP);
+    HAL_Delay(250);
 
     handle_mpu6050();                               // Handle of the MPU-6050 IMU sensor
     handle_sensors();                               // Handle of the optical sensors
@@ -123,6 +124,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    HAL_GPIO_TogglePin(GPIOC, LED1_Pin); // WMS Testing
+    //HAL_GPIO_WritePin(GPIOC, LED1_Pin, GPIO_PIN_RESET); // WMS Testing
+
   }
   /* USER CODE END 3 */
 }
